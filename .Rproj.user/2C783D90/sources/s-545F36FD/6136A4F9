@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1580045419286.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6136A4F9",
+    "lastKnownWriteTime" : 1579997828,
+    "last_content_update" : 1580045419286,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "7FFAEFD9",
+        "caption" : "dcoil",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=dcoil&cache_key=7FFAEFD9",
+        "displayedObservations" : 8577,
+        "environment" : "",
+        "expression" : "dcoil",
+        "object" : "dcoil",
+        "preview" : 0,
+        "totalObservations" : 8577,
+        "variables" : 2
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

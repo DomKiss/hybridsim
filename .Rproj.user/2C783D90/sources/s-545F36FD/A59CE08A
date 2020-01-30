@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1579879559433.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "317589605",
+    "id" : "A59CE08A",
+    "lastKnownWriteTime" : 1580419331,
+    "last_content_update" : 1580419331856,
+    "path" : "C:/egyéb/efrp/1. előzetes/MA-Moment-Linreg-ANN.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "94,43",
+        "scrollLine" : "89",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

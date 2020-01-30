@@ -1,0 +1,64 @@
+library(tseries)
+library(forecast)
+library(LPTime)
+
+
+dcoil=na.omit(dcoil)
+ddates <- dcoil$observation_date
+prices <- dcoil$DCOILWTICO_20200115
+log_returns <- diff(log(prices[1:8000]), p=1) #training set
+adf.test(log_returns)
+
+
+#creating technical indicators
+ddates2=ddates[1:8000]
+prices2=prices[1:8000]
+MA=SMA(prices2, n = 200)
+moment <- momentum(prices2)
+a=na.omit(cbind(ddates2, moment, MA, log_returns))
+
+#setting timeseries
+inds <- seq(as.Date("1986-10-16"), as.Date("2017-09-20"), by = "day")
+x <- ts(cbind(a[,2],a[,3]),start=c(1986, as.numeric(format(inds[1], "%j"))), frequency=250)
+colnames(x) <- c("moment", "ma")
+plot(x)
+y <- ts(cbind(a[,4]),start=c(1986, as.numeric(format(inds[1], "%j"))), frequency=250)
+plot(y)
+
+#arima model 
+model=auto.arima(y=y,xreg=x)
+summary(model)
+
+training_res=resid(model) #hibatagok elmentése
+momentmodel=auto.arima(x[,1]) #ma előrejelzéséhez model
+mamodel=auto.arima(x[,2]) #arima előrejelzéséhez model
+#forecastedvalues
+forecastedmoment=forecast(momentmodel,h=578)
+forecastedma=forecast(mamodel, h=578)
+forecastmomentmean=forecastedmoment$mean
+forecastmamean=forecastedma$mean
+forecastedx=cbind(forecastmomentmean,forecastmamean)
+colnames(forecastedx) <- c("moment", "ma")
+
+forecastedvalues_ln <- forecast(model, h=578, xreg=forecastedx) #x-et is előre kell jelezni
+forecastedvalues_ln
+plot(forecastedvalues_ln)
+numericfc=as.numeric(forecastedvalues_ln$mean)
+finalfc=exp(numericfc)
+
+#rezfc <- resid(forecast1)
+#plot(forecast1)
+#accuracy(forecast1)
+
+#Error
+df <- data.frame(prices[8000:8577], finalfc)
+col_headings <- c("Actual price", "Forecasted price")
+names(df) <- col_headings
+attach(df)
+fc_residual=forecast_resid=df$`Actual price`-df$`Forecasted price`
+
+
+
+
+
+
